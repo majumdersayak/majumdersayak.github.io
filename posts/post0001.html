@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sayak Majumder - A Kind Arrow</title>
+        <link rel="stylesheet" href="../css/default.css" />
+        <link rel="shortcut icon" href="./images/Logo.svg" type="image/x-icon">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="./">A Kind Arrow</a>
+            </div>
+            <nav>
+                <a href="../">Home</a>
+                <a href="./contact.html">Contact</a>
+                <a href="./archive.html">Archive</a>
+            </nav>
+        </header>
+        <main>
+            <h1>Mission IISc - I'll do it</h1>
+            <article>
+                <section class="header">
+                    Last updated on <span id="last-updated"></span>
+                </section>
+                <section>
+                    <p><em>26/09/25</em> - <u>Day 1</u> - Since July 14th I tried to be focused, study for it, I'm fedup of this nonsence distraction and all (fuck everything now will stick to it, only study and write blog, fucking nothing else) not able to start the way I wanted, but now I'm determined... I'll defiently make it to IISc. Not tommorow, I'm going to start from now, lets first move the PYQs from my tablet to pc... Yeah Done. Since it, 11pm also make sure, I'll be desciplined, and will wake-up early at the morning</p>
+                </section>
+            </article>
+        </main>
+        <footer>
+            &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
+        </footer>
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+
+            // Get the last modified date of the document
+            const lastModified = new Date(document.lastModified);
+
+            // Options for formatting
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+            // Update the content
+            document.getElementById("last-updated").textContent = lastModified.toLocaleDateString(undefined, options);
+        </script>
+    </body>
+</html>
