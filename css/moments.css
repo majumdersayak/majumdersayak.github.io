@@ -27,8 +27,8 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.75); /* semi-dark background */
-  backdrop-filter: blur(50px);         /* adds a soft blur effect */
+  background: rgba(0, 0, 0, 0.95); /* semi-dark background */
+  backdrop-filter: blur(250px);         /* adds a soft blur effect */
   align-items: center;
   justify-content: center;
   flex-direction: column;
