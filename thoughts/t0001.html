@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sayak Majumder - A Kind Arrow | Dear, Me!</title>
+        <link rel="stylesheet" href="../css/default.css" />
+        <link rel="stylesheet" href="../css/top-button.css">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">A Kind Arrow</a>
+            </div>
+        </header>
+        <main>
+            <h1>Dear, Me!</h1>
+            <article>
+                <section class="header">
+                    Published on October 03, 2025
+                </section>
+                <section>
+                    <p>
+                        Dear me in 8 months.
+                        <br>
+                        I will make you fucking proud.
+                    </p>
+                </section>
+            </article>
+        </main>
+        <footer>
+            &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
+        </footer>
+        <a href="#top" class="top-link" id="topBtn">↑</a>
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+            // Show button only after scrolling 150px
+            const topBtn = document.getElementById("topBtn");
+            window.addEventListener("scroll", () => {
+                if (document.documentElement.scrollTop > 150) {
+                    topBtn.style.display = "block";
+                } else {
+                    topBtn.style.display = "none";
+                }
+            });
+        </script>
+    </body>
+</html>

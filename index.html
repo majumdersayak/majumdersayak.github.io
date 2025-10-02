@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayak Majumder - A Kind Arrow</title>
+    <link rel="stylesheet" href="./css/default.css">
+    <link rel="stylesheet" href="./css/top-button.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="./">A Kind Arrow</a>
+        </div>
+        <nav>
+            <a href="./thoughts.html">Thoughts</a>
+            <a href="./moments.html">Moments</a>
+            <a href="./contact.html">Contact</a>
+        </nav>
+    </header>
+    <main role="main">
+        <p>A place built by me, for myself!</p>
+    </main>
+    <footer>
+        &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
+    </footer>
+    <a href="#top" class="top-link" id="topBtn">↑</a>
+    <script>
+        // Automatic Year Update
+        document.getElementById("year").textContent = new Date().getFullYear();
+        // Getting to the Top (only activate after scrolling 150px)
+        const topBtn = document.getElementById("topBtn");
+        window.addEventListener("scroll",()=>{
+            if(document.documentElement.scrollTop > 150){
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

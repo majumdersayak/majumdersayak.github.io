@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sayak Majumder - A Kind Arrow | Thoughts</title>
+        <link rel="stylesheet" href="./css/default.css" />
+        <link rel="stylesheet" href="./css/top-button.css">
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="./">A Kind Arrow</a>
+            </div>
+            <nav>
+                <a href="./thoughts.html">Thoughts</a>
+                <a href="./moments.html">Moments</a>
+                <a href="./contact.html">Contact</a>
+            </nav>
+        </header>
+        <main role="main">
+            <h1>Thoughts</h1>
+            <ul>
+                <li><a href="./thoughts/t0001.html">Dear, Me!</a></li>
+            </ul>
+        </main>
+        <footer>
+            &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
+        </footer>
+        <a href="#top" class="top-link" id="topBtn">↑</a>
+        <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+            // Show button only after scrolling 150px
+            const topBtn = document.getElementById("topBtn");
+            window.addEventListener("scroll", () => {
+                if (document.documentElement.scrollTop > 150) {
+                    topBtn.style.display = "block";
+                } else {
+                    topBtn.style.display = "none";
+                }
+            });
+        </script>
+    </body>
+</html>
