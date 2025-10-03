@@ -1,0 +1,57 @@
+/* week-style.css */
+
+.todo-section {
+  margin: 2rem 0;
+}
+
+.todo-section h2 {
+  font-size: 1.8rem;
+  margin: 1.2rem 0;
+  border-bottom: 0.1rem solid #000;
+  padding-bottom: 0.4rem;
+  font-weight: bold;
+}
+
+.todo-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0;
+}
+
+.todo-list li {
+  margin: 0.6rem 0;
+  padding-left: 2rem;
+  position: relative;
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+.todo-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #000;
+  font-weight: bold;
+}
+
+.todo-task {
+  margin-left: 1.2rem;
+  font-style: italic;
+  color: #333;
+}
+
+/* Status styles */
+.todo-pending {
+  color: #c47d00; /* amber */
+}
+
+.todo-running {
+  color: #005bbb; /* blue */
+}
+
+.todo-done {
+  color: #207520; /* green */
+  text-decoration: line-through;
+}
+
+/* Mobile responsiveness stays consistent with your default.css */

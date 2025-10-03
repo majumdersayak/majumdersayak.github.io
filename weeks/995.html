@@ -1,68 +1,118 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Sayak Majumder - A Kind Arrow | W995</title>
-        <link rel="stylesheet" href="../css/default.css" />
-        <link rel="stylesheet" href="../css/top-button.css">
-    </head>
-    <body>
-        <header>
-            <div class="logo">
-                <a href="../">A Kind Arrow</a>
-            </div>
-            <nav>
-              <a href="../weeks/weeks.html">< Back</a>
-            </nav>
-        </header>
-        <main>
-            <h1>995</h1>
-            <article>
-                <section class="header">
-                    1st October to, 7th October 2025
-                    <br>
-                    Started from, 4th October
-                </section>
-                <section>
-                    <p>                            
-                        <!-- Not Started ⏲
-                        Running ⧗ 
-                        Done ✓ -->
-                        <pre>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sayak Majumder - A Kind Arrow | W995</title>
+    <link rel="stylesheet" href="../css/default.css" />
+    <link rel="stylesheet" href="../css/top-button.css">
+    <link rel="stylesheet" href="../css/week-style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="../">A Kind Arrow</a>
+        </div>
+        <nav>
+            <a href="../weeks/weeks.html">< Back</a>
+        </nav>
+    </header>
 
-    - Chemistry 
-            > SBC (Self-Study + DPP) ⏲
-    
-    - Physics
-            > Kinematics (Self-Study + Practice from HCV) ⏲
-    
-    - Mathematics
-            > Sets (Self-Study + DPP + NCERT) ⏲
-    
-    - Biology
-            > Biomolecules (Self-Study + DPP) ⏲
-                        </pre>
-                    </p>
-                </section>
-            </article>
-        </main>
-        <footer>
-            &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
-        </footer>
-        <a href="#top" class="top-link" id="topBtn">↑</a>
-        <script>
-            document.getElementById("year").textContent = new Date().getFullYear();
-            // Show button only after scrolling 150px
-            const topBtn = document.getElementById("topBtn");
-            window.addEventListener("scroll", () => {
-                if (document.documentElement.scrollTop > 150) {
-                    topBtn.style.display = "block";
-                } else {
-                    topBtn.style.display = "none";
-                }
-            });
-        </script>
-    </body>
+    <main>
+        <h1>995</h1>
+        <article>
+            <section class="header">
+                1st October to, 7th October 2025
+                <br>
+                Started from, 4th October
+            </section>
+
+            <!-- Not Started Yet ⏲
+            Running ⧗
+            Done ✓  -->
+
+            <!-- Academically Goal -->
+            <section class="todo-section">
+                <h2>Academic Goal</h2>
+                <ul class="todo-list">
+                    <li>
+                        Chemistry
+                        <span class="todo-task todo-pending">SBC (SS + P) ⏲</span>
+                    </li>
+                    <li>
+                        Physics
+                        <span class="todo-task todo-pending">Kinematics (SS + P) ⏲</span>
+                    </li>
+                    <li>
+                        Mathematics
+                        <span class="todo-task todo-pending">Sets (SS + P) ⏲</span>
+                    </li>
+                    <li>
+                        Biology
+                        <span class="todo-task todo-pending">Biomolecules (SS + P) ⏲</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Physically Goal
+            <section class="todo-section">
+                <h2>Physical Goal</h2>
+                <ul class="todo-list">
+                    <li>
+                        Running
+                        <span class="todo-task todo-pending">30 mins daily ⏲</span>
+                    </li>
+                    <li>
+                        Exercise
+                        <span class="todo-task todo-running">15 mins daily ⏲</span>
+                    </li>
+                </ul>
+            </section> -->
+
+            <!-- Spiritual Goal -->
+             <section class="todo-section">
+                <h2>Spiritual Goal</h2>
+                <ul class="todo-list">
+                    <li>
+                        4th October
+                        <span class="todo-task todo-pending">512 times Jap ⏲</span>
+                    </li>
+                    <li>
+                        5th October
+                        <span class="todo-task todo-pending">768 times Jap ⏲</span>
+                    </li>
+                    <li>
+                        6th October
+                        <span class="todo-task todo-pending">1024 times Jap ⏲</span>
+                    </li>
+                    <li>
+                        7th October
+                        <span class="todo-task todo-pending">1280 times Jap ⏲</span>
+                    </li>
+                </ul>
+             </section>
+        </article>
+    </main>
+
+    <footer>
+        &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
+    </footer>
+
+    <a href="#top" class="top-link" id="topBtn">↑</a>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Show "back to top" button only after scrolling 150px
+        const topBtn = document.getElementById("topBtn");
+        window.addEventListener("scroll", () => {
+            if (document.documentElement.scrollTop > 150) {
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+        });
+    </script>
+</body>
 </html>
