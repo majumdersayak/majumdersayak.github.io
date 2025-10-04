@@ -14,6 +14,7 @@
                 <a href="../">A Kind Arrow</a>
             </div>
             <nav>
+                <button id="theme-toggle" aria-label="Toggle dark mode">☾</button>
               <a href="../thoughts.html"> ↩ Thoughts</a>
             </nav>
         </header>
@@ -47,6 +48,26 @@
                     topBtn.style.display = "none";
                 }
             });
+            // Dark mode toggle logic
+        const toggleBtn = document.getElementById("theme-toggle");
+
+        // Load saved theme preference
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+          document.body.classList.add("dark-mode");
+          toggleBtn.textContent = "☀"; // sun icon when dark mode is active
+        } else {
+          document.body.classList.remove("dark-mode");
+          toggleBtn.textContent = "☾"; // moon icon when light mode is active
+        }
+
+        toggleBtn.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+          const darkModeOn = document.body.classList.contains("dark-mode");
+          toggleBtn.textContent = darkModeOn ? "☀" : "☾";
+          localStorage.setItem("theme", darkModeOn ? "dark" : "light");
+        });
         </script>
     </body>
 </html>
