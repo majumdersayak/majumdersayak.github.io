@@ -2,6 +2,10 @@ html {
   font-size: 62.5%;
 }
 
+* {
+  outline: none !important;
+}
+
 body {
   font-family: 'Times New Roman', Times, serif;
   font-size: 1.6rem;
