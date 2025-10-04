@@ -16,6 +16,7 @@
       <a href="./">A Kind Arrow</a>
     </div>
     <nav>
+      <button id="theme-toggle" aria-label="Toggle dark mode">☾</button>
       <a href="./thoughts.html">Thoughts</a>
       <a href="./moments.html">Moments</a>
       <a href="./contact.html">Contact</a>
@@ -166,6 +167,20 @@
       if (e.key === "Escape") closeLightbox();
     }
   });
+  // Dark mode toggle logic
+         const toggleBtn = document.getElementById("theme-toggle");
+         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+         // Load saved theme or system preference
+         if (localStorage.getItem("theme") === "dark" || (!localStorage.getItem("theme") && prefersDark)) {
+           document.body.classList.add("dark-mode");
+           toggleBtn.textContent = "☀";
+         }
+               toggleBtn.addEventListener("click", () => {
+           document.body.classList.toggle("dark-mode");
+           const darkModeOn = document.body.classList.contains("dark-mode");
+           toggleBtn.textContent = darkModeOn ? "☀" : "☾";
+           localStorage.setItem("theme", darkModeOn ? "dark" : "light");
+         });
 </script>
 </body>
 </html>

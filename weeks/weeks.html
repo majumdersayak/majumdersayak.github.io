@@ -8,14 +8,25 @@
   <link rel="stylesheet" href="../css/default.css" />
   <link rel="stylesheet" href="../css/top-button.css">
   <style>
-    .highlight {
-      animation: blink 1s step-start infinite;
-    }
-    @keyframes blink {
-      50% { background-color: rgb(216, 250, 172); }
-      100% { background-color: transparent; }
-    }
-  </style>
+  .highlight {
+    animation: blink 1s step-start infinite;
+  }
+
+  @keyframes blink {
+    50% { background-color: rgb(189, 255, 102); } /* light mode */
+    100% { background-color: transparent; }
+  }
+
+  /* 🌙 Dark mode adjustment */
+  body.dark-mode .highlight {
+    animation: blink-dark 1s step-start infinite;
+  }
+
+  @keyframes blink-dark {
+    50% { background-color: rgba(100, 180, 255, 0.35); } /* soft blue glow */
+    100% { background-color: transparent; }
+  }
+</style>
 </head>
 <body>
   <header>
@@ -23,6 +34,7 @@
       <a href="../">A Kind Arrow</a>
     </div>
     <nav>
+      <button id="theme-toggle" aria-label="Toggle dark mode">☾</button>
       <a href="../thoughts.html">↩ Thoughts</a>
     </nav>
   </header>
@@ -97,6 +109,20 @@
         alert("Hi, I'm Sayak, and you finally found it! There's nothing special here, it's just me keeping track of my days so I can be a bit more productive and hopefully a better human being. Life is short, we are not here forever, so I want to use my time properly. Maybe only a few weeks left, who knows.");
       }
     });
+     // Dark mode toggle logic
+         const toggleBtn = document.getElementById("theme-toggle");
+         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+         // Load saved theme or system preference
+         if (localStorage.getItem("theme") === "dark" || (!localStorage.getItem("theme") && prefersDark)) {
+           document.body.classList.add("dark-mode");
+           toggleBtn.textContent = "☀";
+         }
+               toggleBtn.addEventListener("click", () => {
+           document.body.classList.toggle("dark-mode");
+           const darkModeOn = document.body.classList.contains("dark-mode");
+           toggleBtn.textContent = darkModeOn ? "☀" : "☾";
+           localStorage.setItem("theme", darkModeOn ? "dark" : "light");
+         });
   </script>
 </body>
 </html>

@@ -150,3 +150,55 @@ article .header {
     font-size: 1.8rem;
   }
 }
+
+/* Theme toggle button */
+#theme-toggle {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #000;
+  transition: transform 0.3s ease;
+}
+
+#theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #eee;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  border-color: #888;
+}
+
+body.dark-mode nav a,
+body.dark-mode .logo a {
+  color: #eee;
+}
+
+body.dark-mode #theme-toggle {
+  color: #eee;
+}
+
+body.dark-mode footer a {
+  color: #80cfff; /* slightly brighter blue for links */
+}
+
+body.dark-mode footer a:hover {
+  color: #b3e0ff; /* subtle glow effect on hover */
+}
+
+/* Link colors for dark mode */
+body.dark-mode a {
+  color: #80cfff; /* sky blue like footer */
+}
+
+body.dark-mode a:hover {
+  color: #b3e0ff;
+}
+

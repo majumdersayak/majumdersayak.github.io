@@ -54,8 +54,6 @@
   text-decoration: line-through;
 }
 
-/* Mobile responsiveness stays consistent with your default.css */
-
 /* Daily Section (similar to todo-section) */
 .daily-section {
   margin: 2rem 0;
@@ -110,4 +108,45 @@
   font-size: 1.2rem;
   color: #777;
   font-style: italic;
+}
+
+/* ===========================================
+   🌙 DARK MODE SUPPORT (matches index.html)
+   =========================================== */
+
+body.dark-mode .todo-section h2,
+body.dark-mode .daily-section h2 {
+  border-bottom-color: #888;
+  color: #e6e6e6;
+}
+
+body.dark-mode .todo-list li::before,
+body.dark-mode .daily-list li::before {
+  color: #e6e6e6;
+}
+
+body.dark-mode .todo-task {
+  color: #ccc;
+}
+
+/* Status colors in dark mode – softened glow */
+body.dark-mode .todo-pending {
+  color: #ffb84d; /* soft amber */
+}
+
+body.dark-mode .todo-running {
+  color: #66b2ff; /* light blue */
+}
+
+body.dark-mode .todo-done {
+  color: #4cd964; /* bright green */
+}
+
+/* Diary entries in dark mode */
+body.dark-mode .diary-entry {
+  color: #aaa;
+}
+
+body.dark-mode .last-updated {
+  color: #9cc9ff; /* same gentle blue as footer */
 }
