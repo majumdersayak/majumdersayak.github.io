@@ -150,18 +150,3 @@ article .header {
     font-size: 1.8rem;
   }
 }
-
-.secret-link {
-    display: block;
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 40px;        /* clickable area size */
-    height: 20px;
-    opacity: 0;         /* fully invisible */
-    cursor: pointer;
-    z-index: 100;
-}
-.secret-link:hover {
-    opacity: 0.1;       /* faint reveal on hover (optional) */
-}
