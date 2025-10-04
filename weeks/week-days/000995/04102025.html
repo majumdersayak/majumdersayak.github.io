@@ -75,13 +75,19 @@
         });
 
         // Last updated timestamp
-        const lastUpdated = document.getElementById("lastUpdated");
-        const now = new Date();
-        lastUpdated.textContent =
-            "Last updated on " +
-            now.toLocaleDateString() +
-            " at " +
-            now.toLocaleTimeString();
+         const lastUpdated = document.getElementById("lastUpdated");
+            fetch(window.location.href)
+              .then(res => {
+                const updated = res.headers.get("last-modified");
+                if (updated) {
+                  const date = new Date(updated);
+                  lastUpdated.textContent =
+                    "Last updated on " +
+                    date.toLocaleDateString() +
+                    " at " +
+                    date.toLocaleTimeString();
+                }
+        });
     </script>
 </body>
 </html>
