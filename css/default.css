@@ -2,8 +2,11 @@ html {
   font-size: 62.5%;
 }
 
+/* Kill focus outlines and tap highlights everywhere */
 * {
   outline: none !important;
+  -webkit-tap-highlight-color: transparent; /* Mobile browsers */
+  -webkit-focus-ring-color: transparent;    /* Safari/Chrome */
 }
 
 body {
