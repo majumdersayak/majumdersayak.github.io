@@ -68,8 +68,17 @@
         break;
       }
     }
-    window.addEventListener("DOMContentLoaded", function () {
-     alert("Hi, I'm Sayak, and you finally found it! There's nothing special here, it's just me keeping track of my days so I can be a bit more productive and hopefully a better human being. Life is short, we are not here forever, so I want to use my time properly. Maybe only a few weeks left, who knows.");
+        window.addEventListener("DOMContentLoaded", function () {
+      try {
+        var shown = localStorage.getItem("sayak_decoy_shown");
+        if (!shown) {
+          alert("Hi, I'm Sayak, and you finally found it! There's nothing special here, it's just me keeping track of my days so I can be a bit more productive and hopefully a better human being. Life is short, we are not here forever, so I want to use my time properly. Maybe only a few weeks left, who knows.");
+          localStorage.setItem("sayak_decoy_shown", "1");
+        }
+      } catch (e) {
+        // localStorage might be disabled; fallback to always showing
+        alert("Hi, I'm Sayak, and you finally found it! There's nothing special here, it's just me keeping track of my days so I can be a bit more productive and hopefully a better human being. Life is short, we are not here forever, so I want to use my time properly. Maybe only a few weeks left, who knows.");
+      }
     });
   </script>
 </body>
