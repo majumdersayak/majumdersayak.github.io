@@ -55,3 +55,59 @@
 }
 
 /* Mobile responsiveness stays consistent with your default.css */
+
+/* Daily Section (similar to todo-section) */
+.daily-section {
+  margin: 2rem 0;
+}
+
+.daily-section h2 {
+  font-size: 1.8rem;
+  margin: 1.2rem 0;
+  border-bottom: 0.1rem solid #000;
+  padding-bottom: 0.4rem;
+  font-weight: bold;
+}
+
+/* Daily tasks list */
+.daily-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0;
+}
+
+.daily-list li {
+  margin: 0.6rem 0;
+  padding-left: 2rem;
+  position: relative;
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+.daily-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #000;
+  font-weight: bold;
+}
+
+/* Diary style (for reflection entries under each day) */
+.diary-entry {
+  font-size: 1.5rem;
+  color: #555;
+  margin: 1rem 0;
+  line-height: 1.6;
+}
+
+.diary-entry p {
+  margin: 0.8rem 0;
+}
+
+/* Last updated */
+.last-updated {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #777;
+  font-style: italic;
+}
