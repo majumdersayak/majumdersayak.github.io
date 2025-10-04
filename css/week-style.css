@@ -53,6 +53,10 @@
   color: #207520; /* green */
   text-decoration: line-through;
 }
+.todo-not-done {
+  color: #b00020;
+  opacity: 0.8;
+}
 
 /* Daily Section (similar to todo-section) */
 .daily-section {
@@ -149,4 +153,9 @@ body.dark-mode .diary-entry {
 
 body.dark-mode .last-updated {
   color: #9cc9ff; /* same gentle blue as footer */
+}
+
+body.dark-mode .todo-not-done {
+  color: #ff6b6b;
+  opacity: 0.9;
 }
