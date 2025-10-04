@@ -25,6 +25,7 @@
     <h1>Moments</h1>
     <article>
       <section class="moments-gallery">
+        <!-- Example image -->
         <img 
           src="./moments/IMG_20250817_215159_HDR-EDIT.jpg" 
           alt="my selfie" 
@@ -41,7 +42,6 @@
   <div id="lightbox" class="lightbox">
     <span class="close">&times;</span>
     <div class="lightbox-text">
-      <p class="upload-date" id="lightbox-upload"></p>
       <p class="taken-date" id="lightbox-taken"></p>
     </div>
     <img class="lightbox-content" id="lightbox-img">
@@ -50,48 +50,51 @@
     <a class="next">&#10095;</a>
   </div>
 
-  <!-- EXIF.js (reads photo metadata) -->
+  <!-- EXIF.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
 
   <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Show top button only after scrolling 150px
+  // Top button show/hide
   const topBtn = document.getElementById("topBtn");
   window.addEventListener("scroll", () => {
     topBtn.style.display = document.documentElement.scrollTop > 150 ? "block" : "none";
   });
 
-  // Lightbox functionality
+  // Lightbox elements
   const gallery = document.querySelectorAll(".moments-gallery img");
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxCaption = document.getElementById("lightbox-caption");
-  const lightboxUpload = document.getElementById("lightbox-upload");
   const lightboxTaken = document.getElementById("lightbox-taken");
   const closeBtn = document.querySelector(".close");
   const prevBtn = document.querySelector(".prev");
   const nextBtn = document.querySelector(".next");  
   let currentIndex = 0;
 
-  // Fetch last-modified date (uploaded time)
+  // Try extracting taken date (EXIF first, fallback filename)
   gallery.forEach(img => {
-    fetch(img.src, { method: 'HEAD' })
-      .then(res => {
-        const lastModified = res.headers.get("last-modified");
-        if (lastModified) {
-          img.dataset.upload = new Date(lastModified).toISOString();
-        }
-      })
-      .catch(err => console.log("Could not fetch last-modified for", img.src));
-
-    // Read EXIF metadata for taken date
     EXIF.getData(img, function() {
       const taken = EXIF.getTag(this, "DateTimeOriginal");
       if (taken) {
-        // EXIF gives "YYYY:MM:DD HH:MM:SS" → convert
-        const formatted = taken.replace(/:/, "-").replace(/:/, "-");
+        // Convert "YYYY:MM:DD HH:MM:SS" → valid ISO string
+        const formatted = taken.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3");
         img.dataset.taken = new Date(formatted).toISOString();
+      } else {
+        // Fallback: parse filename
+        const match = img.src.match(/(\d{8})_(\d{6})/); 
+        if (match) {
+          const dateStr = match[1]; // YYYYMMDD
+          const timeStr = match[2]; // HHMMSS
+          const year = dateStr.slice(0,4);
+          const month = dateStr.slice(4,6);
+          const day = dateStr.slice(6,8);
+          const hour = timeStr.slice(0,2);
+          const minute = timeStr.slice(2,4);
+          const second = timeStr.slice(4,6);
+          img.dataset.taken = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`).toISOString();
+        }
       }
     });
   });
@@ -123,15 +126,7 @@
     lightboxImg.src = img.src;
     lightboxCaption.textContent = img.dataset.caption || "";
 
-    // Uploaded (last-modified)
-    if (img.dataset.upload) {
-      const uploadDate = new Date(img.dataset.upload);
-      lightboxUpload.textContent = "Uploaded: " + uploadDate.toLocaleDateString() + " " + uploadDate.toLocaleTimeString();
-    } else {
-      lightboxUpload.textContent = "";
-    }
-
-    // Taken (EXIF metadata)
+    // Taken date (EXIF or filename fallback)
     if (img.dataset.taken) {
       const takenDate = new Date(img.dataset.taken);
       lightboxTaken.textContent = "Taken: " + takenDate.toLocaleDateString() + " " + takenDate.toLocaleTimeString();
@@ -143,6 +138,7 @@
     nextBtn.style.display = currentIndex === gallery.length - 1 ? "none" : "block";
   }
 
+  // Bind events
   gallery.forEach((img, index) => {
     img.addEventListener("click", () => openLightbox(index));
   });
@@ -150,11 +146,9 @@
   nextBtn.addEventListener("click", showNext);
   prevBtn.addEventListener("click", showPrev);
 
-  // Close lightbox on click outside image
+  // Close lightbox on background click
   lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-      closeLightbox();
-    }
+    if (e.target === lightbox) closeLightbox();
   });
 
   // Keyboard navigation
