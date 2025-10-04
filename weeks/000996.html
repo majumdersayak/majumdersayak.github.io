@@ -4,10 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sayak Majumder - A Kind Arrow | W995</title>
+    <title>Sayak Majumder - A Kind Arrow | W996</title>
     <link rel="stylesheet" href="../css/default.css" />
     <link rel="stylesheet" href="../css/top-button.css">
     <link rel="stylesheet" href="../css/week-style.css">
+    <style>
+        .highlight {
+            animation: blink 1s step-start infinite;
+        }
+        @keyframes blink {
+            50% { background-color: rgb(233, 233, 168); }
+            100% { background-color: transparent; }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -20,14 +29,17 @@
     </header>
 
     <main>
-        <h1>995</h1>
+        <h1>996</h1>
         <article>
             <section class="header">
                 1st October to, 7th October 2025
                 <br>
                 Started from 4th October
                 <br>
-                <a href="../weeks/week-days/000995/04102025.html">4</a> <!-- <a href="http://">5</a> <a href="http://">6</a> <a href="http://">7</a> -->
+                <a href="../weeks/week-days/000996/04102025.html">4</a>
+                <!-- <a href="../weeks/week-days/000996/05102025.html">5</a>
+                <a href="../weeks/week-days/000996/06102025.html">6</a>
+                <a href="../weeks/week-days/000996/07102025.html">7</a> -->
             </section>
 
             <!-- Not Started Yet ⏲
@@ -56,21 +68,6 @@
                     </li>
                 </ul>
             </section>
-
-            <!-- Physically Goal
-            <section class="todo-section">
-                <h2>Physical Goal</h2>
-                <ul class="todo-list">
-                    <li>
-                        Running
-                        <span class="todo-task todo-pending">30 mins daily ⏲</span>
-                    </li>
-                    <li>
-                        Exercise
-                        <span class="todo-task todo-running">15 mins daily ⏲</span>
-                    </li>
-                </ul>
-            </section> -->
 
             <!-- Spiritual Goal -->
              <section class="todo-section">
@@ -109,12 +106,21 @@
         // Show "back to top" button only after scrolling 150px
         const topBtn = document.getElementById("topBtn");
         window.addEventListener("scroll", () => {
-            if (document.documentElement.scrollTop > 150) {
-                topBtn.style.display = "block";
-            } else {
-                topBtn.style.display = "none";
-            }
+            topBtn.style.display = document.documentElement.scrollTop > 150 ? "block" : "none";
         });
+
+        // Highlight current day in the header links
+        const today = new Date();
+        const day = today.getDate(); // e.g. 4
+        const headerLinks = document.querySelectorAll(".header a");
+
+        for (let link of headerLinks) {
+            if (link.textContent.trim() === String(day)) {
+                link.classList.add("highlight");
+                link.textContent = link.textContent + " *";
+                break;
+            }
+        }
     </script>
 </body>
 </html>

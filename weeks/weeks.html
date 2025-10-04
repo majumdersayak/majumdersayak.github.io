@@ -1,49 +1,73 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Sayak Majumder - A Kind Arrow | Weeks</title>
-        <link rel="stylesheet" href="../css/default.css" />
-        <link rel="stylesheet" href="../css/top-button.css">
-    </head>
-    <body>
-        <header>
-            <div class="logo">
-                <a href="../">A Kind Arrow</a>
-            </div>
-            <nav>
-              <a href="../thoughts.html">↩ Thoughts</a>
-            </nav>
-        </header>
-        <main>
-            <h1>Weeks</h1>
-            <article>
-                <section>
-                    <ul>
-                        <li>
-                            <a href="../weeks/000995.html">995</a>
-                        </li>
-                    </ul>
-                </section>
-            </article>
-        </main>
-        <footer>
-            &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
-        </footer>
-        <a href="#top" class="top-link" id="topBtn">↑</a>
-        <script>
-            document.getElementById("year").textContent = new Date().getFullYear();
-            // Show button only after scrolling 150px
-            const topBtn = document.getElementById("topBtn");
-            window.addEventListener("scroll", () => {
-                if (document.documentElement.scrollTop > 150) {
-                    topBtn.style.display = "block";
-                } else {
-                    topBtn.style.display = "none";
-                }
-            });
-        </script>
-    </body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sayak Majumder - A Kind Arrow | Weeks</title>
+  <link rel="stylesheet" href="../css/default.css" />
+  <link rel="stylesheet" href="../css/top-button.css">
+  <style>
+    .highlight {
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink {
+      50% { background-color: rgb(216, 250, 172); }
+      100% { background-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="../">A Kind Arrow</a>
+    </div>
+    <nav>
+      <a href="../thoughts.html">↩ Thoughts</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Weeks</h1>
+    <article>
+      <section>
+        <ul id="weeks-list">
+          <li><a href="../weeks/000996.html">0996</a></li>
+          <!-- You will keep adding weeks here -->
+        </ul>
+      </section>
+    </article>
+  </main>
+  <footer>
+    &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
+  </footer>
+  <a href="#top" class="top-link" id="topBtn">↑</a>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Show top button only after scrolling 150px
+    const topBtn = document.getElementById("topBtn");
+    window.addEventListener("scroll", () => {
+      topBtn.style.display = document.documentElement.scrollTop > 150 ? "block" : "none";
+    });
+
+    // Birth date
+    const startDate = new Date("2006-09-06T00:00:00"); 
+    const today = new Date();
+    // Current week number
+    const diffWeeks = Math.floor((today - startDate) / (7 * 24 * 60 * 60 * 1000)) + 1; 
+    const currentWeek = String(diffWeeks).padStart(4, "0"); 
+    // Highlight the current week
+    const weeksList = document.getElementById("weeks-list").getElementsByTagName("a");
+    for (let link of weeksList) {
+      const file = link.getAttribute("href");
+      const match = file.match(/(\d{4})\.html$/);
+      if (match && match[1] === currentWeek) {
+        link.textContent = match[1] + " *"; 
+        link.parentElement.classList.add("highlight"); // blinking effect
+        break;
+      }
+    }
+  </script>
+</body>
 </html>
