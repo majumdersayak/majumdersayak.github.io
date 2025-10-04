@@ -74,7 +74,9 @@
             </section>
          </article>
          <!-- Last Updated Timestamp -->
-         <div class="last-updated" id="lastUpdated"></div>
+         <div class="last-updated">
+            <p>Last updated on 04/10/2025 at 23:35</p>
+         </div>
       </main>
       <footer>
          &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
@@ -92,21 +94,6 @@
              } else {
                  topBtn.style.display = "none";
              }
-         });
-         
-         // Last updated timestamp
-          const lastUpdated = document.getElementById("lastUpdated");
-             fetch(window.location.href)
-               .then(res => {
-                 const updated = res.headers.get("last-modified");
-                 if (updated) {
-                   const date = new Date(updated);
-                   lastUpdated.textContent =
-                     "Last updated on " +
-                     date.toLocaleDateString() +
-                     " at " +
-                     date.toLocaleTimeString();
-                 }
          });
          // Dark mode toggle logic
          const toggleBtn = document.getElementById("theme-toggle");
