@@ -1,123 +1,170 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="fediverse:creator" content="@majumdersayak@mstdn.social">
-        <title>Sayak Majumder - A Kind Arrow | Moments</title>
-        <link rel="stylesheet" href="./css/default.css" />
-        <link rel="stylesheet" href="./css/top-button.css">
-        <link rel="stylesheet" href="./css/moments.css">
-    </head>
-    <body>
-        <header>
-            <div class="logo">
-                <a href="./">A Kind Arrow</a>
-            </div>
-            <nav>
-                <a href="./thoughts.html">Thoughts</a>
-                <a href="./moments.html">Moments</a>
-                <a href="./contact.html">Contact</a>
-            </nav>
-        </header>
-        <main>
-            <h1>Moments</h1>
-            <article>
-            <section class="moments-gallery">
-                <!-- <img src="" alt="" data-caption=""> -->
-                <img src="./moments/IMG_20250817_215159_HDR-EDIT.jpg" alt="my selfie" data-caption="Hmm, some random clicks!">
-            </section>
-        </article>
-        </main>
-        <footer>
-            &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
-        </footer>
-        <a href="#top" class="top-link" id="topBtn">↑</a>
-        <!-- Lightbox -->
-        <!-- Lightbox -->
-        <div id="lightbox" class="lightbox">
-            <span class="close">&times;</span>
-            <img class="lightbox-content" id="lightbox-img">
-            <div class="caption" id="lightbox-caption"></div>
-            <a class="prev">&#10094;</a>
-            <a class="next">&#10095;</a>
-        </div>
-        <script>
-            document.getElementById("year").textContent = new Date().getFullYear();
-            // Show button only after scrolling 150px
-            const topBtn = document.getElementById("topBtn");
-            window.addEventListener("scroll", () => {
-                if (document.documentElement.scrollTop > 150) {
-                    topBtn.style.display = "block";
-                } else {
-                    topBtn.style.display = "none";
-                }
-            });
-            // Lightbox functionality
-            const gallery = document.querySelectorAll(".moments-gallery img");
-            const lightbox = document.getElementById("lightbox");
-            const lightboxImg = document.getElementById("lightbox-img");
-            const lightboxCaption = document.getElementById("lightbox-caption");
-            const closeBtn = document.querySelector(".close");
-            const prevBtn = document.querySelector(".prev");
-            const nextBtn = document.querySelector(".next");  
-            let currentIndex = 0;
-            function openLightbox(index) {
-                currentIndex = index;
-                lightbox.style.display = "flex";
-                document.body.classList.add("no-scroll"); // stop background scroll
-                updateLightbox();
-            }
-            function closeLightbox() {
-                lightbox.style.display = "none";
-                document.body.classList.remove("no-scroll"); // restore scroll
-            }
-            function showNext() {
-                if (currentIndex < gallery.length - 1) {
-                    currentIndex++;
-                    updateLightbox();
-                }
-            }
-            function showPrev() {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateLightbox();
-                }
-            }
-            function updateLightbox() {
-                const img = gallery[currentIndex];
-                lightboxImg.src = img.src;
-                lightboxCaption.textContent = img.dataset.caption || "";
-                // Handle arrows visibility
-                if (gallery.length <= 1) {
-                    prevBtn.style.display = "none";
-                    nextBtn.style.display = "none";
-                } else {
-                    prevBtn.style.display = currentIndex === 0 ? "none" : "block";
-                    nextBtn.style.display = currentIndex === gallery.length - 1 ? "none" : "block";
-                }
-            }
-            gallery.forEach((img, index) => {
-                img.addEventListener("click", () => openLightbox(index));
-            });
-            closeBtn.addEventListener("click", closeLightbox);
-            nextBtn.addEventListener("click", showNext);
-            prevBtn.addEventListener("click", showPrev);
-            // Close lightbox on click outside image
-            lightbox.addEventListener("click", (e) => {
-                if (e.target === lightbox) {
-                    closeLightbox();
-                }
-            });
-            // Keyboard navigation
-            document.addEventListener("keydown", (e) => {
-                if (lightbox.style.display === "flex") {
-                    if (e.key === "ArrowRight") showNext();
-                    if (e.key === "ArrowLeft") showPrev();
-                    if (e.key === "Escape") closeLightbox();
-                }
-            });
-        </script>
-    </body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="fediverse:creator" content="@majumdersayak@mstdn.social">
+  <title>Sayak Majumder - A Kind Arrow | Moments</title>
+  <link rel="stylesheet" href="./css/default.css" />
+  <link rel="stylesheet" href="./css/top-button.css">
+  <link rel="stylesheet" href="./css/moments.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="./">A Kind Arrow</a>
+    </div>
+    <nav>
+      <a href="./thoughts.html">Thoughts</a>
+      <a href="./moments.html">Moments</a>
+      <a href="./contact.html">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Moments</h1>
+    <article>
+      <section class="moments-gallery">
+        <img 
+          src="./moments/IMG_20250817_215159_HDR-EDIT.jpg" 
+          alt="my selfie" 
+          data-caption="Hmm, some random clicks!">
+      </section>
+    </article>
+  </main>
+  <footer>
+    &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
+  </footer>
+  <a href="#top" class="top-link" id="topBtn">↑</a>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <div class="lightbox-text">
+      <p class="upload-date" id="lightbox-upload"></p>
+      <p class="taken-date" id="lightbox-taken"></p>
+    </div>
+    <img class="lightbox-content" id="lightbox-img">
+    <div class="caption" id="lightbox-caption"></div>
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+  </div>
+
+  <!-- EXIF.js (reads photo metadata) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+
+  <script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Show top button only after scrolling 150px
+  const topBtn = document.getElementById("topBtn");
+  window.addEventListener("scroll", () => {
+    topBtn.style.display = document.documentElement.scrollTop > 150 ? "block" : "none";
+  });
+
+  // Lightbox functionality
+  const gallery = document.querySelectorAll(".moments-gallery img");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxCaption = document.getElementById("lightbox-caption");
+  const lightboxUpload = document.getElementById("lightbox-upload");
+  const lightboxTaken = document.getElementById("lightbox-taken");
+  const closeBtn = document.querySelector(".close");
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");  
+  let currentIndex = 0;
+
+  // Fetch last-modified date (uploaded time)
+  gallery.forEach(img => {
+    fetch(img.src, { method: 'HEAD' })
+      .then(res => {
+        const lastModified = res.headers.get("last-modified");
+        if (lastModified) {
+          img.dataset.upload = new Date(lastModified).toISOString();
+        }
+      })
+      .catch(err => console.log("Could not fetch last-modified for", img.src));
+
+    // Read EXIF metadata for taken date
+    EXIF.getData(img, function() {
+      const taken = EXIF.getTag(this, "DateTimeOriginal");
+      if (taken) {
+        // EXIF gives "YYYY:MM:DD HH:MM:SS" → convert
+        const formatted = taken.replace(/:/, "-").replace(/:/, "-");
+        img.dataset.taken = new Date(formatted).toISOString();
+      }
+    });
+  });
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightbox.style.display = "flex";
+    document.body.classList.add("no-scroll");
+    updateLightbox();
+  }
+  function closeLightbox() {
+    lightbox.style.display = "none";
+    document.body.classList.remove("no-scroll");
+  }
+  function showNext() {
+    if (currentIndex < gallery.length - 1) {
+      currentIndex++;
+      updateLightbox();
+    }
+  }
+  function showPrev() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateLightbox();
+    }
+  }
+  function updateLightbox() {
+    const img = gallery[currentIndex];
+    lightboxImg.src = img.src;
+    lightboxCaption.textContent = img.dataset.caption || "";
+
+    // Uploaded (last-modified)
+    if (img.dataset.upload) {
+      const uploadDate = new Date(img.dataset.upload);
+      lightboxUpload.textContent = "Uploaded: " + uploadDate.toLocaleDateString() + " " + uploadDate.toLocaleTimeString();
+    } else {
+      lightboxUpload.textContent = "";
+    }
+
+    // Taken (EXIF metadata)
+    if (img.dataset.taken) {
+      const takenDate = new Date(img.dataset.taken);
+      lightboxTaken.textContent = "Taken: " + takenDate.toLocaleDateString() + " " + takenDate.toLocaleTimeString();
+    } else {
+      lightboxTaken.textContent = "";
+    }
+
+    prevBtn.style.display = currentIndex === 0 ? "none" : "block";
+    nextBtn.style.display = currentIndex === gallery.length - 1 ? "none" : "block";
+  }
+
+  gallery.forEach((img, index) => {
+    img.addEventListener("click", () => openLightbox(index));
+  });
+  closeBtn.addEventListener("click", closeLightbox);
+  nextBtn.addEventListener("click", showNext);
+  prevBtn.addEventListener("click", showPrev);
+
+  // Close lightbox on click outside image
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (lightbox.style.display === "flex") {
+      if (e.key === "ArrowRight") showNext();
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "Escape") closeLightbox();
+    }
+  });
+</script>
+</body>
 </html>

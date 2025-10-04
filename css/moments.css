@@ -5,18 +5,17 @@
 }
 
 .moments-gallery img {
-    width: 100%;
-    aspect-ratio: 1 / 1;      /* makes every image a perfect square */
-    object-fit: cover;        /* crops instead of stretching */
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+  width: 100%;
+  aspect-ratio: 1 / 1;      /* keeps square look */
+  object-fit: cover;        /* crops instead of stretching */
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .moments-gallery img:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
-
 
 /* Lightbox styles */
 .lightbox {
@@ -27,8 +26,8 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.95); /* semi-dark background */
-  backdrop-filter: blur(250px);         /* adds a soft blur effect */
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(250px);
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -44,24 +43,38 @@
 }
 
 .lightbox-content img {
-    max-width: 90%;
-    max-height: 80vh;
-    width: auto;   /* keep natural ratio */
-    height: auto;  /* keep natural ratio */
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  max-width: 90%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
+/* Dates + Caption */
+.lightbox-text {
+  max-width: 60%;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #ccc;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.lightbox-text p {
+  margin: 0.2rem 0;
+  font-style: italic;
+}
 
 .caption {
-    max-width: 50%;        /* caption will only take 70% of screen */
-    margin: 15px auto 0;   /* center it under the image */
-    text-align: center;
-    font-style: italic;
-    font-size: 15px;
-    line-height: 1.6;
-    color: #eee;
-    word-wrap: break-word;
+  max-width: 60%;
+  margin: 0.8rem auto 0;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #eee;
+  word-wrap: break-word;
 }
 
 /* Buttons */
@@ -97,9 +110,8 @@
 }
 
 body.no-scroll {
-    overflow: hidden;
+  overflow: hidden;
 }
-
 
 /* Responsive grid */
 @media (min-width: 640px) {
