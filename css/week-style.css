@@ -1,117 +1,121 @@
 /* week-style.css */
 
 .todo-section {
-  margin: 2rem 0;
+	margin: 2rem 0;
 }
 
 .todo-section h2 {
-  font-size: 1.8rem;
-  margin: 1.2rem 0;
-  border-bottom: 0.1rem solid #000;
-  padding-bottom: 0.4rem;
-  font-weight: bold;
+	font-size: 1.8rem;
+	margin: 1.2rem 0;
+	border-bottom: 0.1rem solid #000;
+	padding-bottom: 0.4rem;
+	font-weight: bold;
 }
 
 .todo-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 1rem 0;
+	list-style: none;
+	padding-left: 0;
+	margin: 1rem 0;
 }
 
 .todo-list li {
-  margin: 0.6rem 0;
-  padding-left: 2rem;
-  position: relative;
-  font-size: 1.6rem;
-  line-height: 1.4;
+	margin: 0.6rem 0;
+	padding-left: 2rem;
+	position: relative;
+	font-size: 1.6rem;
+	line-height: 1.4;
 }
 
 .todo-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #000;
-  font-weight: bold;
+	content: "•";
+	position: absolute;
+	left: 0;
+	color: #000;
+	font-weight: bold;
 }
 
 .todo-task {
-  margin-left: 1.2rem;
-  font-style: italic;
-  color: #333;
+	margin-left: 1.2rem;
+	font-style: italic;
+	color: #333;
 }
 
 /* Status styles */
 .todo-pending {
-  color: #c47d00; /* amber */
+	color: #c47d00;
+	/* amber */
 }
 
 .todo-running {
-  color: #005bbb; /* blue */
+	color: #005bbb;
+	/* blue */
 }
 
 .todo-done {
-  color: #207520; /* green */
-  text-decoration: line-through;
+	color: #207520;
+	/* green */
+	text-decoration: line-through;
 }
+
 .todo-not-done {
-  color: #b00020;
-  opacity: 0.8;
+	color: #b00020;
+	opacity: 0.8;
 }
 
 /* Daily Section (similar to todo-section) */
 .daily-section {
-  margin: 2rem 0;
+	margin: 2rem 0;
 }
 
 .daily-section h2 {
-  font-size: 1.8rem;
-  margin: 1.2rem 0;
-  border-bottom: 0.1rem solid #000;
-  padding-bottom: 0.4rem;
-  font-weight: bold;
+	font-size: 1.8rem;
+	margin: 1.2rem 0;
+	border-bottom: 0.1rem solid #000;
+	padding-bottom: 0.4rem;
+	font-weight: bold;
 }
 
 /* Daily tasks list */
 .daily-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 1rem 0;
+	list-style: none;
+	padding-left: 0;
+	margin: 1rem 0;
 }
 
 .daily-list li {
-  margin: 0.6rem 0;
-  padding-left: 2rem;
-  position: relative;
-  font-size: 1.6rem;
-  line-height: 1.4;
+	margin: 0.6rem 0;
+	padding-left: 2rem;
+	position: relative;
+	font-size: 1.6rem;
+	line-height: 1.4;
 }
 
 .daily-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #000;
-  font-weight: bold;
+	content: "•";
+	position: absolute;
+	left: 0;
+	color: #000;
+	font-weight: bold;
 }
 
 /* Diary style (for reflection entries under each day) */
 .diary-entry {
-  font-size: 1.5rem;
-  color: #555;
-  margin: 1rem 0;
-  line-height: 1.6;
+	font-size: 1.5rem;
+	color: #555;
+	margin: 1rem 0;
+	line-height: 1.6;
 }
 
 .diary-entry p {
-  margin: 0.8rem 0;
+	margin: 0.8rem 0;
 }
 
 /* Last updated */
 .last-updated {
-  margin-top: 2rem;
-  font-size: 1.2rem;
-  color: #777;
-  font-style: italic;
+	margin-top: 2rem;
+	font-size: 1.2rem;
+	color: #777;
+	font-style: italic;
 }
 
 /* ===========================================
@@ -120,42 +124,46 @@
 
 body.dark-mode .todo-section h2,
 body.dark-mode .daily-section h2 {
-  border-bottom-color: #888;
-  color: #e6e6e6;
+	border-bottom-color: #888;
+	color: #e6e6e6;
 }
 
 body.dark-mode .todo-list li::before,
 body.dark-mode .daily-list li::before {
-  color: #e6e6e6;
+	color: #e6e6e6;
 }
 
 body.dark-mode .todo-task {
-  color: #ccc;
+	color: #ccc;
 }
 
 /* Status colors in dark mode – softened glow */
 body.dark-mode .todo-pending {
-  color: #ffb84d; /* soft amber */
+	color: #ffb84d;
+	/* soft amber */
 }
 
 body.dark-mode .todo-running {
-  color: #66b2ff; /* light blue */
+	color: #66b2ff;
+	/* light blue */
 }
 
 body.dark-mode .todo-done {
-  color: #4cd964; /* bright green */
+	color: #4cd964;
+	/* bright green */
 }
 
 /* Diary entries in dark mode */
 body.dark-mode .diary-entry {
-  color: #aaa;
+	color: #aaa;
 }
 
 body.dark-mode .last-updated {
-  color: #9cc9ff; /* same gentle blue as footer */
+	color: #9cc9ff;
+	/* same gentle blue as footer */
 }
 
 body.dark-mode .todo-not-done {
-  color: #ff6b6b;
-  opacity: 0.9;
+	color: #ff6b6b;
+	opacity: 0.9;
 }

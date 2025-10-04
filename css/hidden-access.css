@@ -1,25 +1,24 @@
-
-
 #secretFooter {
-  position: relative;
-  text-align: center;
-  padding: 20px 10px;
-  color: #555;
-  background: transparent;
+	position: relative;
+	text-align: center;
+	padding: 20px 10px;
+	color: #555;
+	background: transparent;
 }
+
 .secret-overlay {
-  position: absolute;
-  bottom: 4px;      
-  right: 6px;
-  width: 60px;
-  height: 25px;
-  background: transparent;
-  opacity: 0;             
-  pointer-events: auto;   
-  cursor: pointer;
-  user-select: none;       
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  touch-action: manipulation; 
-  z-index: 999;
+	position: absolute;
+	bottom: 4px;
+	right: 6px;
+	width: 60px;
+	height: 25px;
+	background: transparent;
+	opacity: 0;
+	pointer-events: auto;
+	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	touch-action: manipulation;
+	z-index: 999;
 }

@@ -1,177 +1,174 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sayak Majumder - A Kind Arrow | Thoughts</title>
-  <link rel="stylesheet" href="./css/default.css" />
-  <link rel="stylesheet" href="./css/top-button.css" />
-  <link rel="stylesheet" href="./css/hidden-access.css" />
-</head>
-
-<body>
-  <header>
-    <div class="logo"><a href="./">A Kind Arrow</a></div>
-    <nav>
-      <button id="theme-toggle" aria-label="Toggle dark mode">☾</button>
-      <a href="./thoughts.html">Thoughts</a>
-      <a href="./moments.html">Moments</a>
-      <a href="./contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <main role="main">
-    <h1>Thoughts</h1>
-    <ul>
-      <li><a href="./thoughts/t0001.html">Dear, Me!</a></li>
-    </ul>
-  </main>
-
-  <footer id="secretFooter" role="contentinfo">
-    &copy; <span id="year"></span> by
-    <a href="https://majumdersayak.github.io">Sayak Majumder</a>
-  </footer>
-  <a href="#top" class="top-link" id="topBtn">↑</a>
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const correctHash = "1377cf1c26ad8b25418e99c085c996fc7db72d9ef0c9415b88c1e1312dabf5d3";
-    const secretUrl   = "./weeks/weeks.html";
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-    const topBtn = document.getElementById('topBtn');
-    if (topBtn) {
-      topBtn.style.display = 'none';
-      window.addEventListener('scroll', () => {
-        topBtn.style.display = (document.documentElement.scrollTop > 150) ? 'block' : 'none';
-      });
-      topBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-    /* ---------- crypto helper ---------- */
-    async function sha256Hex(str) {
-      if (!window.crypto || !crypto.subtle) {
-        throw new Error('Web Crypto API not available');
-      }
-      const encoder = new TextEncoder();
-      const data = encoder.encode(str);
-      const digest = await crypto.subtle.digest('SHA-256', data);
-      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2,'0')).join('');
-    }
-
-    async function askAndVerify() {
-      const key = prompt('Enter access key:');
-      if (key === null) return;
-      try {
-        const h = await sha256Hex(key);
-        if (h === correctHash) {
-          window.location.href = secretUrl;
-        } else {
-          alert('Access denied.');
-        }
-      } catch (err) {
-        console.error('Crypto unavailable or error:', err);
-        alert('This browser does not support the required crypto features.');
-      }
-    }
-    const footer = document.getElementById('secretFooter');
-    if (!footer) {
-      console.warn('secretFooter not found.');
-      return;
-    }
-    const overlay = document.createElement('div');
-    overlay.className = 'secret-overlay';
-    overlay.setAttribute('aria-hidden', 'true');
-    overlay.addEventListener('mousedown', e => e.preventDefault());
-    overlay.addEventListener('touchstart', e => e.preventDefault());
-
-    footer.appendChild(overlay);
-    const TIME_WINDOW = 800; 
-    let clickCount = 0;
-    let clickTimer = null;
-
-    function handleClick() {
-      clickCount++;
-      if (clickCount === 1) {
-        clickTimer = setTimeout(() => { clickCount = 0; clickTimer = null; }, TIME_WINDOW);
-      }
-      if (clickCount === 3) {
-        if (clickTimer) clearTimeout(clickTimer);
-        clickCount = 0;
-        clickTimer = null;
-        askAndVerify();
-      }
-    }
-
-    overlay.addEventListener('click', handleClick);
-    let tapCount = 0;
-    let lastTap = 0;
-    let longPressTimer = null;
-    const LONG_PRESS_MS = 700;
-
-    overlay.addEventListener('touchstart', (e) => {
-      if (longPressTimer) clearTimeout(longPressTimer);
-      longPressTimer = setTimeout(() => {
-        longPressTimer = null;
-        askAndVerify();
-      }, LONG_PRESS_MS);
-    });
-
-    overlay.addEventListener('touchend', (e) => {
-      if (longPressTimer) {
-        clearTimeout(longPressTimer);
-        longPressTimer = null;
-
-        const now = Date.now();
-        if ((now - lastTap) <= TIME_WINDOW) {
-          tapCount++;
-        } else {
-          tapCount = 1;
-        }
-        lastTap = now;
-
-        if (tapCount === 3) {
-          tapCount = 0;
-          askAndVerify();
-        }
-        setTimeout(() => { tapCount = 0; }, TIME_WINDOW);
-      }
-    });
-    footer.addEventListener('contextmenu', e => e.preventDefault());
-    window.addEventListener('keydown', (e) => {
-      const active = document.activeElement;
-      const tag = active && active.tagName ? active.tagName.toLowerCase() : null;
-      const editable = active && (active.isContentEditable || tag === 'input' || tag === 'textarea');
-      if (!editable && e.ctrlKey && e.altKey && e.key.toLowerCase() === 'k') {
-        askAndVerify();
-      }
-    });
-    if (!window.crypto || !crypto.subtle) {
-      console.warn('Web Crypto API not available — secret verification may not work on this device.');
-    }
-  }); 
-  // Dark mode toggle logic
-        const toggleBtn = document.getElementById("theme-toggle");
-
-        // Load saved theme preference
-        const savedTheme = localStorage.getItem("theme");
-
-        if (savedTheme === "dark") {
-          document.body.classList.add("dark-mode");
-          toggleBtn.textContent = "☀"; // sun icon when dark mode is active
-        } else {
-          document.body.classList.remove("dark-mode");
-          toggleBtn.textContent = "☾"; // moon icon when light mode is active
-        }
-
-        toggleBtn.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          const darkModeOn = document.body.classList.contains("dark-mode");
-          toggleBtn.textContent = darkModeOn ? "☀" : "☾";
-          localStorage.setItem("theme", darkModeOn ? "dark" : "light");
-        });
-  </script>
-</body>
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="x-ua-compatible" content="ie=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Sayak Majumder - A Kind Arrow | Thoughts</title>
+      <link rel="stylesheet" href="./css/default.css" />
+      <link rel="stylesheet" href="./css/top-button.css" />
+      <link rel="stylesheet" href="./css/hidden-access.css" />
+   </head>
+   <body>
+      <header>
+         <div class="logo"><a href="./">A Kind Arrow</a></div>
+         <nav>
+            <button id="theme-toggle" aria-label="Toggle dark mode">☾</button>
+            <a href="./thoughts.html">Thoughts</a>
+            <a href="./moments.html">Moments</a>
+            <a href="./contact.html">Contact</a>
+         </nav>
+      </header>
+      <main role="main">
+         <h1>Thoughts</h1>
+         <ul>
+            <li><a href="./thoughts/t0001.html">Dear, Me!</a></li>
+         </ul>
+      </main>
+      <footer id="secretFooter" role="contentinfo">
+         &copy; <span id="year"></span> by
+         <a href="https://majumdersayak.github.io">Sayak Majumder</a>
+      </footer>
+      <a href="#top" class="top-link" id="topBtn">↑</a>
+      <script>
+         document.addEventListener('DOMContentLoaded', () => {
+           const correctHash = "1377cf1c26ad8b25418e99c085c996fc7db72d9ef0c9415b88c1e1312dabf5d3";
+           const secretUrl   = "./weeks/weeks.html";
+           const yearEl = document.getElementById('year');
+           if (yearEl) yearEl.textContent = new Date().getFullYear();
+           const topBtn = document.getElementById('topBtn');
+           if (topBtn) {
+             topBtn.style.display = 'none';
+             window.addEventListener('scroll', () => {
+               topBtn.style.display = (document.documentElement.scrollTop > 150) ? 'block' : 'none';
+             });
+             topBtn.addEventListener('click', (e) => {
+               e.preventDefault();
+               window.scrollTo({ top: 0, behavior: 'smooth' });
+             });
+           }
+           /* ---------- crypto helper ---------- */
+           async function sha256Hex(str) {
+             if (!window.crypto || !crypto.subtle) {
+               throw new Error('Web Crypto API not available');
+             }
+             const encoder = new TextEncoder();
+             const data = encoder.encode(str);
+             const digest = await crypto.subtle.digest('SHA-256', data);
+             return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2,'0')).join('');
+           }
+         
+           async function askAndVerify() {
+             const key = prompt('Enter access key:');
+             if (key === null) return;
+             try {
+               const h = await sha256Hex(key);
+               if (h === correctHash) {
+                 window.location.href = secretUrl;
+               } else {
+                 alert('Access denied.');
+               }
+             } catch (err) {
+               console.error('Crypto unavailable or error:', err);
+               alert('This browser does not support the required crypto features.');
+             }
+           }
+           const footer = document.getElementById('secretFooter');
+           if (!footer) {
+             console.warn('secretFooter not found.');
+             return;
+           }
+           const overlay = document.createElement('div');
+           overlay.className = 'secret-overlay';
+           overlay.setAttribute('aria-hidden', 'true');
+           overlay.addEventListener('mousedown', e => e.preventDefault());
+           overlay.addEventListener('touchstart', e => e.preventDefault());
+         
+           footer.appendChild(overlay);
+           const TIME_WINDOW = 800; 
+           let clickCount = 0;
+           let clickTimer = null;
+         
+           function handleClick() {
+             clickCount++;
+             if (clickCount === 1) {
+               clickTimer = setTimeout(() => { clickCount = 0; clickTimer = null; }, TIME_WINDOW);
+             }
+             if (clickCount === 3) {
+               if (clickTimer) clearTimeout(clickTimer);
+               clickCount = 0;
+               clickTimer = null;
+               askAndVerify();
+             }
+           }
+         
+           overlay.addEventListener('click', handleClick);
+           let tapCount = 0;
+           let lastTap = 0;
+           let longPressTimer = null;
+           const LONG_PRESS_MS = 700;
+         
+           overlay.addEventListener('touchstart', (e) => {
+             if (longPressTimer) clearTimeout(longPressTimer);
+             longPressTimer = setTimeout(() => {
+               longPressTimer = null;
+               askAndVerify();
+             }, LONG_PRESS_MS);
+           });
+         
+           overlay.addEventListener('touchend', (e) => {
+             if (longPressTimer) {
+               clearTimeout(longPressTimer);
+               longPressTimer = null;
+         
+               const now = Date.now();
+               if ((now - lastTap) <= TIME_WINDOW) {
+                 tapCount++;
+               } else {
+                 tapCount = 1;
+               }
+               lastTap = now;
+         
+               if (tapCount === 3) {
+                 tapCount = 0;
+                 askAndVerify();
+               }
+               setTimeout(() => { tapCount = 0; }, TIME_WINDOW);
+             }
+           });
+           footer.addEventListener('contextmenu', e => e.preventDefault());
+           window.addEventListener('keydown', (e) => {
+             const active = document.activeElement;
+             const tag = active && active.tagName ? active.tagName.toLowerCase() : null;
+             const editable = active && (active.isContentEditable || tag === 'input' || tag === 'textarea');
+             if (!editable && e.ctrlKey && e.altKey && e.key.toLowerCase() === 'k') {
+               askAndVerify();
+             }
+           });
+           if (!window.crypto || !crypto.subtle) {
+             console.warn('Web Crypto API not available — secret verification may not work on this device.');
+           }
+         }); 
+         // Dark mode toggle logic
+               const toggleBtn = document.getElementById("theme-toggle");
+         
+               // Load saved theme preference
+               const savedTheme = localStorage.getItem("theme");
+         
+               if (savedTheme === "dark") {
+                 document.body.classList.add("dark-mode");
+                 toggleBtn.textContent = "☀"; // sun icon when dark mode is active
+               } else {
+                 document.body.classList.remove("dark-mode");
+                 toggleBtn.textContent = "☾"; // moon icon when light mode is active
+               }
+         
+               toggleBtn.addEventListener("click", () => {
+                 document.body.classList.toggle("dark-mode");
+                 const darkModeOn = document.body.classList.contains("dark-mode");
+                 toggleBtn.textContent = darkModeOn ? "☀" : "☾";
+                 localStorage.setItem("theme", darkModeOn ? "dark" : "light");
+               });
+      </script>
+   </body>
 </html>

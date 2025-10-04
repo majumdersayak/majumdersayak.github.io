@@ -1,192 +1,189 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="fediverse:creator" content="@majumdersayak@mstdn.social">
-  <title>Sayak Majumder - A Kind Arrow | Moments</title>
-  <link rel="stylesheet" href="./css/default.css" />
-  <link rel="stylesheet" href="./css/top-button.css">
-  <link rel="stylesheet" href="./css/moments.css">
-</head>
-<body>
-  <header>
-    <div class="logo">
-      <a href="./">A Kind Arrow</a>
-    </div>
-    <nav>
-      <button id="theme-toggle" aria-label="Toggle dark mode">☾</button>
-      <a href="./thoughts.html">Thoughts</a>
-      <a href="./moments.html">Moments</a>
-      <a href="./contact.html">Contact</a>
-    </nav>
-  </header>
-  <main>
-    <h1>Moments</h1>
-    <article>
-      <section class="moments-gallery">
-        <img 
-          src="./moments/20250125_140335.jpg" 
-          alt="self-made telescope"
-          data-caption="Haha, just look at this beauty!">
-        <img 
-          src="./moments/IMG-20250211-WA0023~2.jpg" 
-          alt="moon shot"
-          data-caption="First moon shot with my self-made telescope">
-        <img 
-          src="./moments/IMG_20250817_215159_HDR-EDIT.jpg" 
-          alt="my selfie" 
-          data-caption="Hmm, some random clicks!">
-      </section>
-    </article>
-  </main>
-  <footer>
-    &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
-  </footer>
-  <a href="#top" class="top-link" id="topBtn">↑</a>
-
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <span class="close">&times;</span>
-    <div class="lightbox-text">
-      <p class="taken-date" id="lightbox-taken"></p>
-    </div>
-    <img class="lightbox-content" id="lightbox-img">
-    <div class="caption" id="lightbox-caption"></div>
-    <a class="prev">&#10094;</a>
-    <a class="next">&#10095;</a>
-  </div>
-
-  <!-- EXIF.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
-
-  <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // Top button show/hide
-  const topBtn = document.getElementById("topBtn");
-  window.addEventListener("scroll", () => {
-    topBtn.style.display = document.documentElement.scrollTop > 150 ? "block" : "none";
-  });
-
-  // Lightbox elements
-  const gallery = document.querySelectorAll(".moments-gallery img");
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const lightboxCaption = document.getElementById("lightbox-caption");
-  const lightboxTaken = document.getElementById("lightbox-taken");
-  const closeBtn = document.querySelector(".close");
-  const prevBtn = document.querySelector(".prev");
-  const nextBtn = document.querySelector(".next");  
-  let currentIndex = 0;
-
-  // Try extracting taken date (EXIF first, fallback filename)
-  gallery.forEach(img => {
-    EXIF.getData(img, function() {
-      const taken = EXIF.getTag(this, "DateTimeOriginal");
-      if (taken) {
-        // Convert "YYYY:MM:DD HH:MM:SS" → valid ISO string
-        const formatted = taken.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3");
-        img.dataset.taken = new Date(formatted).toISOString();
-      } else {
-        // Fallback: parse filename
-        const match = img.src.match(/(\d{8})_(\d{6})/); 
-        if (match) {
-          const dateStr = match[1]; // YYYYMMDD
-          const timeStr = match[2]; // HHMMSS
-          const year = dateStr.slice(0,4);
-          const month = dateStr.slice(4,6);
-          const day = dateStr.slice(6,8);
-          const hour = timeStr.slice(0,2);
-          const minute = timeStr.slice(2,4);
-          const second = timeStr.slice(4,6);
-          img.dataset.taken = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`).toISOString();
-        }
-      }
-    });
-  });
-
-  function openLightbox(index) {
-    currentIndex = index;
-    lightbox.style.display = "flex";
-    document.body.classList.add("no-scroll");
-    updateLightbox();
-  }
-  function closeLightbox() {
-    lightbox.style.display = "none";
-    document.body.classList.remove("no-scroll");
-  }
-  function showNext() {
-    if (currentIndex < gallery.length - 1) {
-      currentIndex++;
-      updateLightbox();
-    }
-  }
-  function showPrev() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateLightbox();
-    }
-  }
-  function updateLightbox() {
-    const img = gallery[currentIndex];
-    lightboxImg.src = img.src;
-    lightboxCaption.textContent = img.dataset.caption || "";
-
-    // Taken date (EXIF or filename fallback)
-    if (img.dataset.taken) {
-      const takenDate = new Date(img.dataset.taken);
-      lightboxTaken.textContent = "Taken: " + takenDate.toLocaleDateString() + " " + takenDate.toLocaleTimeString();
-    } else {
-      lightboxTaken.textContent = "";
-    }
-
-    prevBtn.style.display = currentIndex === 0 ? "none" : "block";
-    nextBtn.style.display = currentIndex === gallery.length - 1 ? "none" : "block";
-  }
-
-  // Bind events
-  gallery.forEach((img, index) => {
-    img.addEventListener("click", () => openLightbox(index));
-  });
-  closeBtn.addEventListener("click", closeLightbox);
-  nextBtn.addEventListener("click", showNext);
-  prevBtn.addEventListener("click", showPrev);
-
-  // Close lightbox on background click
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  // Keyboard navigation
-  document.addEventListener("keydown", (e) => {
-    if (lightbox.style.display === "flex") {
-      if (e.key === "ArrowRight") showNext();
-      if (e.key === "ArrowLeft") showPrev();
-      if (e.key === "Escape") closeLightbox();
-    }
-  });
-  // Dark mode toggle logic
-        const toggleBtn = document.getElementById("theme-toggle");
-
-        // Load saved theme preference
-        const savedTheme = localStorage.getItem("theme");
-
-        if (savedTheme === "dark") {
-          document.body.classList.add("dark-mode");
-          toggleBtn.textContent = "☀"; // sun icon when dark mode is active
-        } else {
-          document.body.classList.remove("dark-mode");
-          toggleBtn.textContent = "☾"; // moon icon when light mode is active
-        }
-
-        toggleBtn.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          const darkModeOn = document.body.classList.contains("dark-mode");
-          toggleBtn.textContent = darkModeOn ? "☀" : "☾";
-          localStorage.setItem("theme", darkModeOn ? "dark" : "light");
-        });
-</script>
-</body>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="fediverse:creator" content="@majumdersayak@mstdn.social">
+      <title>Sayak Majumder - A Kind Arrow | Moments</title>
+      <link rel="stylesheet" href="./css/default.css" />
+      <link rel="stylesheet" href="./css/top-button.css">
+      <link rel="stylesheet" href="./css/moments.css">
+   </head>
+   <body>
+      <header>
+         <div class="logo">
+            <a href="./">A Kind Arrow</a>
+         </div>
+         <nav>
+            <button id="theme-toggle" aria-label="Toggle dark mode">☾</button>
+            <a href="./thoughts.html">Thoughts</a>
+            <a href="./moments.html">Moments</a>
+            <a href="./contact.html">Contact</a>
+         </nav>
+      </header>
+      <main>
+         <h1>Moments</h1>
+         <article>
+            <section class="moments-gallery">
+               <img 
+                  src="./moments/20250125_140335.jpg" 
+                  alt="self-made telescope"
+                  data-caption="Haha, just look at this beauty!">
+               <img 
+                  src="./moments/IMG-20250211-WA0023~2.jpg" 
+                  alt="moon shot"
+                  data-caption="First moon shot with my self-made telescope">
+               <img 
+                  src="./moments/IMG_20250817_215159_HDR-EDIT.jpg" 
+                  alt="my selfie" 
+                  data-caption="Hmm, some random clicks!">
+            </section>
+         </article>
+      </main>
+      <footer>
+         &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
+      </footer>
+      <a href="#top" class="top-link" id="topBtn">↑</a>
+      <!-- Lightbox -->
+      <div id="lightbox" class="lightbox">
+         <span class="close">&times;</span>
+         <div class="lightbox-text">
+            <p class="taken-date" id="lightbox-taken"></p>
+         </div>
+         <img class="lightbox-content" id="lightbox-img">
+         <div class="caption" id="lightbox-caption"></div>
+         <a class="prev">&#10094;</a>
+         <a class="next">&#10095;</a>
+      </div>
+      <!-- EXIF.js -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+      <script>
+         document.getElementById("year").textContent = new Date().getFullYear();
+         
+         // Top button show/hide
+         const topBtn = document.getElementById("topBtn");
+         window.addEventListener("scroll", () => {
+           topBtn.style.display = document.documentElement.scrollTop > 150 ? "block" : "none";
+         });
+         
+         // Lightbox elements
+         const gallery = document.querySelectorAll(".moments-gallery img");
+         const lightbox = document.getElementById("lightbox");
+         const lightboxImg = document.getElementById("lightbox-img");
+         const lightboxCaption = document.getElementById("lightbox-caption");
+         const lightboxTaken = document.getElementById("lightbox-taken");
+         const closeBtn = document.querySelector(".close");
+         const prevBtn = document.querySelector(".prev");
+         const nextBtn = document.querySelector(".next");  
+         let currentIndex = 0;
+         
+         // Try extracting taken date (EXIF first, fallback filename)
+         gallery.forEach(img => {
+           EXIF.getData(img, function() {
+             const taken = EXIF.getTag(this, "DateTimeOriginal");
+             if (taken) {
+               // Convert "YYYY:MM:DD HH:MM:SS" → valid ISO string
+               const formatted = taken.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3");
+               img.dataset.taken = new Date(formatted).toISOString();
+             } else {
+               // Fallback: parse filename
+               const match = img.src.match(/(\d{8})_(\d{6})/); 
+               if (match) {
+                 const dateStr = match[1]; // YYYYMMDD
+                 const timeStr = match[2]; // HHMMSS
+                 const year = dateStr.slice(0,4);
+                 const month = dateStr.slice(4,6);
+                 const day = dateStr.slice(6,8);
+                 const hour = timeStr.slice(0,2);
+                 const minute = timeStr.slice(2,4);
+                 const second = timeStr.slice(4,6);
+                 img.dataset.taken = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`).toISOString();
+               }
+             }
+           });
+         });
+         
+         function openLightbox(index) {
+           currentIndex = index;
+           lightbox.style.display = "flex";
+           document.body.classList.add("no-scroll");
+           updateLightbox();
+         }
+         function closeLightbox() {
+           lightbox.style.display = "none";
+           document.body.classList.remove("no-scroll");
+         }
+         function showNext() {
+           if (currentIndex < gallery.length - 1) {
+             currentIndex++;
+             updateLightbox();
+           }
+         }
+         function showPrev() {
+           if (currentIndex > 0) {
+             currentIndex--;
+             updateLightbox();
+           }
+         }
+         function updateLightbox() {
+           const img = gallery[currentIndex];
+           lightboxImg.src = img.src;
+           lightboxCaption.textContent = img.dataset.caption || "";
+         
+           // Taken date (EXIF or filename fallback)
+           if (img.dataset.taken) {
+             const takenDate = new Date(img.dataset.taken);
+             lightboxTaken.textContent = "Taken: " + takenDate.toLocaleDateString() + " " + takenDate.toLocaleTimeString();
+           } else {
+             lightboxTaken.textContent = "";
+           }
+         
+           prevBtn.style.display = currentIndex === 0 ? "none" : "block";
+           nextBtn.style.display = currentIndex === gallery.length - 1 ? "none" : "block";
+         }
+         
+         // Bind events
+         gallery.forEach((img, index) => {
+           img.addEventListener("click", () => openLightbox(index));
+         });
+         closeBtn.addEventListener("click", closeLightbox);
+         nextBtn.addEventListener("click", showNext);
+         prevBtn.addEventListener("click", showPrev);
+         
+         // Close lightbox on background click
+         lightbox.addEventListener("click", (e) => {
+           if (e.target === lightbox) closeLightbox();
+         });
+         
+         // Keyboard navigation
+         document.addEventListener("keydown", (e) => {
+           if (lightbox.style.display === "flex") {
+             if (e.key === "ArrowRight") showNext();
+             if (e.key === "ArrowLeft") showPrev();
+             if (e.key === "Escape") closeLightbox();
+           }
+         });
+         // Dark mode toggle logic
+               const toggleBtn = document.getElementById("theme-toggle");
+         
+               // Load saved theme preference
+               const savedTheme = localStorage.getItem("theme");
+         
+               if (savedTheme === "dark") {
+                 document.body.classList.add("dark-mode");
+                 toggleBtn.textContent = "☀"; // sun icon when dark mode is active
+               } else {
+                 document.body.classList.remove("dark-mode");
+                 toggleBtn.textContent = "☾"; // moon icon when light mode is active
+               }
+         
+               toggleBtn.addEventListener("click", () => {
+                 document.body.classList.toggle("dark-mode");
+                 const darkModeOn = document.body.classList.contains("dark-mode");
+                 toggleBtn.textContent = darkModeOn ? "☀" : "☾";
+                 localStorage.setItem("theme", darkModeOn ? "dark" : "light");
+               });
+      </script>
+   </body>
 </html>

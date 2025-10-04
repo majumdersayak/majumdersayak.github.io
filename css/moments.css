@@ -1,127 +1,134 @@
 .moments-gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem;
 }
 
 .moments-gallery img {
-  width: 100%;
-  aspect-ratio: 1 / 1;      /* keeps square look */
-  object-fit: cover;        /* crops instead of stretching */
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	/* keeps square look */
+	object-fit: cover;
+	/* crops instead of stretching */
+	border-radius: 10px;
+	cursor: pointer;
+	transition: transform 0.3s ease;
 }
 
 .moments-gallery img:hover {
-  transform: scale(1.05);
+	transform: scale(1.05);
 }
 
 /* Lightbox styles */
 .lightbox {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(250px);
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 2rem;
-  box-sizing: border-box;
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.95);
+	backdrop-filter: blur(250px);
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 2rem;
+	box-sizing: border-box;
 }
 
 .lightbox-content {
-  max-width: 90%;
-  max-height: 70%;
-  border-radius: 0.8rem;
-  margin-bottom: 1rem;
+	max-width: 90%;
+	max-height: 70%;
+	border-radius: 0.8rem;
+	margin-bottom: 1rem;
 }
 
 .lightbox-content img {
-  max-width: 90%;
-  max-height: 80vh;
-  width: auto;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+	max-width: 90%;
+	max-height: 80vh;
+	width: auto;
+	height: auto;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Dates + Caption */
 .lightbox-text {
-  max-width: 60%;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #ccc;
-  font-size: 1.4rem;
-  line-height: 1.4;
+	max-width: 60%;
+	text-align: center;
+	margin-bottom: 1rem;
+	color: #ccc;
+	font-size: 1.4rem;
+	line-height: 1.4;
 }
 
 .lightbox-text p {
-  margin: 0.2rem 0;
-  font-style: italic;
+	margin: 0.2rem 0;
+	font-style: italic;
 }
 
 .caption {
-  max-width: 60%;
-  margin: 0.8rem auto 0;
-  text-align: center;
-  font-style: italic;
-  font-size: 1.5rem;
-  line-height: 1.6;
-  color: #eee;
-  word-wrap: break-word;
+	max-width: 60%;
+	margin: 0.8rem auto 0;
+	text-align: center;
+	font-style: italic;
+	font-size: 1.5rem;
+	line-height: 1.6;
+	color: #eee;
+	word-wrap: break-word;
 }
 
 /* Buttons */
 .close {
-  position: absolute;
-  top: 2rem;
-  right: 3rem;
-  color: #fff;
-  font-size: 3rem;
-  cursor: pointer;
-  font-weight: bold;
+	position: absolute;
+	top: 2rem;
+	right: 3rem;
+	color: #fff;
+	font-size: 3rem;
+	cursor: pointer;
+	font-weight: bold;
 }
 
 .prev,
 .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  font-size: 3rem;
-  color: #fff;
-  padding: 1rem;
-  transform: translateY(-50%);
-  user-select: none;
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	font-size: 3rem;
+	color: #fff;
+	padding: 1rem;
+	transform: translateY(-50%);
+	user-select: none;
 }
 
-.prev { left: 2rem; }
-.next { right: 2rem; }
+.prev {
+	left: 2rem;
+}
+
+.next {
+	right: 2rem;
+}
 
 .prev:hover,
 .next:hover,
 .close:hover {
-  color: #aaa;
+	color: #aaa;
 }
 
 body.no-scroll {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 /* Responsive grid */
 @media (min-width: 640px) {
-  .moments-gallery {
-    grid-template-columns: 1fr 1fr;
-  }
+	.moments-gallery {
+		grid-template-columns: 1fr 1fr;
+	}
 }
 
 @media (min-width: 1024px) {
-  .moments-gallery {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+	.moments-gallery {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 }

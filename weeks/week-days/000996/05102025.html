@@ -1,121 +1,113 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sayak Majumder - A Kind Arrow | 5th October 2025</title>
-    <link rel="stylesheet" href="../../../css/default.css" />
-    <link rel="stylesheet" href="../../../css/top-button.css">
-    <link rel="stylesheet" href="../../../css/week-style.css">
-</head>
-<body>
-    <header>
-        <div class="logo">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Sayak Majumder - A Kind Arrow | 5th October 2025</title>
+      <link rel="stylesheet" href="../../../css/default.css" />
+      <link rel="stylesheet" href="../../../css/top-button.css">
+      <link rel="stylesheet" href="../../../css/week-style.css">
+   </head>
+   <body>
+      <header>
+         <div class="logo">
             <a href="../../../index.html">A Kind Arrow</a>
-        </div>
-        <nav>
+         </div>
+         <nav>
             <button id="theme-toggle" aria-label="Toggle dark mode">☾</button>
             <a href="../../../weeks/000996.html">↩ Week 996</a>
-        </nav>
-    </header>
-
-    <main>
-        <h1>5th October 2025</h1>
-        <article>
+         </nav>
+      </header>
+      <main>
+         <h1>5th October 2025</h1>
+         <article>
             <section class="header">
-                Daily breakdown and reflections
+               Daily breakdown and reflections
             </section>
-
             <!-- Not Started Yet ⏲
-            Running ⧗
-            Done ✓ 
-            Not Done ✗ -->
-
+               Running ⧗
+               Done ✓ 
+               Not Done ✗ -->
             <!-- Daily Tasks -->
             <section class="daily-section">
-                <h2>Tasks & Actions</h2>
-                <ul class="daily-list">
-                    <h4>Academic Goal</h4>
-                        <li>Chemistry <span class="todo-task todo-pending">SBC Self-Study ⏲</span></li>
-                    <h4>Spiritual Goal</h4>
-                        <li><span class="todo-task todo-pending">648 times Jap ⏲</span></li>
-                    <h4>Physical Goal</h4>
-                        <li>
-                            <span class="todo-task todo-pending">10 Push-Ups ⏲</span>
-                            <span class="todo-task todo-pending">10 Sit-Ups ⏲</span>
-                            <span class="todo-task todo-pending">10 Squats ⏲</span>
-                        </li>
-                </ul>
+               <h2>Tasks & Actions</h2>
+               <ul class="daily-list">
+                  <h4>Academic Goal</h4>
+                  <li>Chemistry <span class="todo-task todo-pending">SBC Self-Study ⏲</span></li>
+                  <h4>Spiritual Goal</h4>
+                  <li><span class="todo-task todo-pending">648 times Jap ⏲</span></li>
+                  <h4>Physical Goal</h4>
+                  <li>
+                     <span class="todo-task todo-pending">10 Push-Ups ⏲</span>
+                     <span class="todo-task todo-pending">10 Sit-Ups ⏲</span>
+                     <span class="todo-task todo-pending">10 Squats ⏲</span>
+                  </li>
+               </ul>
             </section>
-
             <!-- Diary Reflection -->
             <section class="daily-section">
-                <h2>How was the day !</h2>
-                <div class="diary-entry">
-                    <p></p>
-                </div>
+               <h2>How was the day !</h2>
+               <div class="diary-entry">
+                  <p></p>
+               </div>
             </section>
-        </article>
-
-        <!-- Last Updated Timestamp -->
-        <div class="last-updated" id="lastUpdated"></div>
-    </main>
-
-    <footer>
-        &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
-    </footer>
-
-    <a href="#top" class="top-link" id="topBtn">↑</a>
-
-    <script>
-        // Insert current year in footer
-        document.getElementById("year").textContent = new Date().getFullYear();
-
-        // Show "back to top" button only after scrolling 150px
-        const topBtn = document.getElementById("topBtn");
-        window.addEventListener("scroll", () => {
-            if (document.documentElement.scrollTop > 150) {
-                topBtn.style.display = "block";
-            } else {
-                topBtn.style.display = "none";
-            }
-        });
-
-        // Last updated timestamp
-         const lastUpdated = document.getElementById("lastUpdated");
-            fetch(window.location.href)
-              .then(res => {
-                const updated = res.headers.get("last-modified");
-                if (updated) {
-                  const date = new Date(updated);
-                  lastUpdated.textContent =
-                    "Last updated on " +
-                    date.toLocaleDateString() +
-                    " at " +
-                    date.toLocaleTimeString();
-                }
-        });
-        // Dark mode toggle logic
-        const toggleBtn = document.getElementById("theme-toggle");
-
-        // Load saved theme preference
-        const savedTheme = localStorage.getItem("theme");
-
-        if (savedTheme === "dark") {
-          document.body.classList.add("dark-mode");
-          toggleBtn.textContent = "☀"; // sun icon when dark mode is active
-        } else {
-          document.body.classList.remove("dark-mode");
-          toggleBtn.textContent = "☾"; // moon icon when light mode is active
-        }
-
-        toggleBtn.addEventListener("click", () => {
-          document.body.classList.toggle("dark-mode");
-          const darkModeOn = document.body.classList.contains("dark-mode");
-          toggleBtn.textContent = darkModeOn ? "☀" : "☾";
-          localStorage.setItem("theme", darkModeOn ? "dark" : "light");
-        });
-    </script>
-</body>
+         </article>
+         <!-- Last Updated Timestamp -->
+         <div class="last-updated" id="lastUpdated"></div>
+      </main>
+      <footer>
+         &copy; <span id="year"></span> by <a href="https://majumdersayak.github.io/">Sayak Majumder</a><br>
+      </footer>
+      <a href="#top" class="top-link" id="topBtn">↑</a>
+      <script>
+         // Insert current year in footer
+         document.getElementById("year").textContent = new Date().getFullYear();
+         
+         // Show "back to top" button only after scrolling 150px
+         const topBtn = document.getElementById("topBtn");
+         window.addEventListener("scroll", () => {
+             if (document.documentElement.scrollTop > 150) {
+                 topBtn.style.display = "block";
+             } else {
+                 topBtn.style.display = "none";
+             }
+         });
+         
+         // Last updated timestamp
+          const lastUpdated = document.getElementById("lastUpdated");
+             fetch(window.location.href)
+               .then(res => {
+                 const updated = res.headers.get("last-modified");
+                 if (updated) {
+                   const date = new Date(updated);
+                   lastUpdated.textContent =
+                     "Last updated on " +
+                     date.toLocaleDateString() +
+                     " at " +
+                     date.toLocaleTimeString();
+                 }
+         });
+         // Dark mode toggle logic
+         const toggleBtn = document.getElementById("theme-toggle");
+         
+         // Load saved theme preference
+         const savedTheme = localStorage.getItem("theme");
+         
+         if (savedTheme === "dark") {
+           document.body.classList.add("dark-mode");
+           toggleBtn.textContent = "☀"; // sun icon when dark mode is active
+         } else {
+           document.body.classList.remove("dark-mode");
+           toggleBtn.textContent = "☾"; // moon icon when light mode is active
+         }
+         
+         toggleBtn.addEventListener("click", () => {
+           document.body.classList.toggle("dark-mode");
+           const darkModeOn = document.body.classList.contains("dark-mode");
+           toggleBtn.textContent = darkModeOn ? "☀" : "☾";
+           localStorage.setItem("theme", darkModeOn ? "dark" : "light");
+         });
+      </script>
+   </body>
 </html>
